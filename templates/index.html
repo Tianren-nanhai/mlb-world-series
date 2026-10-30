@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MLB 世界大賽總決賽賽程圖</title>
+    <!-- 引入 Bootstrap 5 CSS -->
+    <link href="https://jsdelivr.net" rel="stylesheet">
+    <style>
+        body { background-color: #f4f7f6; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .header-title { background: linear-gradient(135deg, #002D62 0%, #BA0C2F 100%); color: white; padding: 2rem 0; text-align: center; margin-bottom: 2rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .match-card { background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: none; margin-bottom: 1.5rem; transition: transform 0.2s; }
+        .match-card:hover { transform: translateY(-3px); }
+        .game-title { background-color: #f8f9fa; border-bottom: 1px solid #edf2f7; font-weight: bold; color: #4a5568; border-top-left-radius: 12px; border-top-right-radius: 12px; }
+        .team-name { font-weight: 600; font-size: 1.1rem; }
+        .score-badge { font-size: 1.2rem; font-weight: bold; min-width: 45px; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <div class="header-title">
+        <h1>⚾ MLB 世界大賽總決賽賽程圖 ⚾</h1>
+        <p class="mb-0">World Series Championship Schedule</p>
+    </div>
+
+    <div class="container" style="max-width: 800px;">
+        <div class="row">
+            {% for match in matches %}
+            <div class="col-12">
+                <div class="card match-card">
+                    <!-- 欄位3：時間 (放在卡片頂部標題列) -->
+                    <div class="card-header game-title d-flex justify-content-between align-items-center py-2 px-4">
+                        <span>{{ match.game_name }}</span>
+                        <span class="badge bg-secondary">⏰ 時間: {{ match.game_time }}</span>
+                    </div>
+                    
+                    <div class="card-body py-3 px-4">
+                        <!-- 客隊資訊 -->
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <div class="team-name text-muted">
+                                <span class="me-2">🔵</span>欄位1 (隊伍 TEAM): {{ match.team_away }} (客)
+                            </div>
+                            <div class="score-badge badge bg-dark">
+                                {{ match.score_away }}
+                            </div>
+                        </div>
+                        
+                        <div class="text-center my-1 text-muted" style="font-size: 0.8rem; letter-spacing: 2px;">VS</div>
+                        
+                        <!-- 主隊資訊 -->
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="team-name text-dark">
+                                <span class="me-2">🔴</span>欄位1 (隊伍 TEAM): {{ match.team_home }} (主)
+                            </div>
+                            <div class="score-badge badge bg-danger">
+                                {{ match.score_home }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <footer class="text-center my-5 text-muted small">
+        © 2026 MLB World Series Tracker. Powered by Flask.
+    </footer>
+
+</body>
+</html>
